@@ -65,6 +65,6 @@
 目前技術上仍有許多限制，若非在網路上有極大量臉部照片以及豐富表情存檔的名人，一般人士大可放心，扣掉前者惡意擷取照片變造不雅圖片（這個狀況下有現行法律責任）的狀況，我們在網路上的影像存檔尚不足以被用來建造專屬於您的影像分佈，吾友小安的狀況極其特殊，雖然在數學上的可能性是存在的，針對這類不管是影像或者聲音分佈的變造技術都已存在，日前有人收集歐巴馬數年來的演講畫面與聲音，創造了一個可以讓歐巴馬說出任何話的影像變造技術[ref2]．因此相關的道德討論與法律制度的建立自然是必要的，在世界各國對於個資的保護越來越重視的網路時代，除了政府本身對數據擁有者的定義以及服務提供商的限制以外，各式新穎的技術更是層出不窮，加上這些技術並非特意創造來為惡，在創立更佳細膩的法律來維護權力之前，管理的責任是否只能繼續交給經營的平台，同時更加小心保護你我在網路上的數位足跡？
 
 
-ref1 https://www.northjersey.com/story/news/bergen/old-tappan/2017/12/26/paramus-woman-speaks-out-discovering-fake-nude-photos-herself-online/962938001/
+[ref1 - Story about Katie Krausz](https://www.northjersey.com/story/news/bergen/old-tappan/2017/12/26/paramus-woman-speaks-out-discovering-fake-nude-photos-herself-online/962938001/)
 
-ref2 https://www.bbc.com/news/av/technology-40598465/fake-obama-created-using-ai-tool-to-make-phoney-speeches
+[ref2 - Fake Obama Speech](https://www.bbc.com/news/av/technology-40598465/fake-obama-created-using-ai-tool-to-make-phoney-speeches)
