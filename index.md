@@ -1,37 +1,66 @@
-## Welcome to GitHub Pages
+# 色情與人工智慧 換臉與解碼 #
 
-You can use the [editor on GitHub](https://github.com/jeffshih/writing/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+### 日前有位網友貼出了神似神力女超人嘉兒蓋朵 Gal Gadot的不雅影片， 在AI產生自我意識開始毀滅世界之前，相關的影像技術似乎先開始毀滅了人們的隱私。 #
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+近來人工智慧飛速發展，任何領域都與人工智慧深度學習沾上邊，提出貝式網路並在2011年成為圖靈獎得主的Judea Pearl在日前的一場演講中提到“All the impressive achievements of deep learning amount to just curve fitting”
 
-```markdown
-Syntax highlighted code block
+在之前的文章中提到過，機器學習的目的是將問題以數學語言形式化並求解，大部分的問題透過數學描述出來是非線性的，沒有辦法直接求得解析解，
+為了得到近似解，必須透過大量的資料去逼近該曲線，這個迭代並逼近的步驟就是所謂的學習過程，
+而深度學習近年的進展使得人們得已更加高效地解決了許多過去難以解決的非線性問題。
 
-# Header 1
-## Header 2
-### Header 3
+那，色情與機器學習又有什麼關係呢？在回答這個問題之前我們先來看看這些所謂的人工智慧是怎麼解決問題，在影像相關的領域又是怎麼應用的呢?
 
-- Bulleted
-- List
+我們可以想像一個平面的矩陣，每個點各有一個數值，矩陣的長寬就是我們所稱的解析度，而每個點的數值若規範在0~255，表現在電腦螢幕上便是一張灰階的影像，又如果把這個矩陣推廣到三維，高為3，那便是目前常見的彩色影像表示法。例如最直觀的RGB表示法就是將三個相同大小的矩陣重疊來產生彩色影像，設計領域會見到的色碼例如#FF00FF 分別代表該像素三個圖層的數值並以十六進位表示。
 
-1. Numbered
-2. List
+<img src="https://convertingcolors.com/background-FF00FF.svg"/>  
 
-**Bold** and _Italic_ and `Code` text
+- FF代表256(16*16)故FF00FF是一個(256,0,256)的向量
 
-[Link](url) and ![Image](src)
-```
+另外常見的表示法還有HSV，每一個點一樣由一個三維的向量表示，HSV表示法下的Hue代表了彩度，數值為0~360,而S(Saturation)及V(value)則分別代表飽和度及亮度，在這種表示法下每個點的空間分佈可以視為一個圓柱體，每個點的三個維度則是該柱體中的座標。
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Hsl-hsv_models.svg/800px-Hsl-hsv_models.svg.png" />
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jeffshih/writing/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+- #FF00FF在HSV空間中的表示為 300°, 100, 100，其中Ｈ為極坐標
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+舉了兩種不同描述彩色影像的方法，我們基本上可以想像一張影像的色彩部分是怎麼被數位化的，而形狀部分呢？傳統的特徵提取方法會使用許多複雜的數學來描述特定的形狀，例如有名的笛卡兒心型線：
+
+    極坐標 r = 1-sinθ
+    
+    參數座標 x = 2r(sin(θ)-1/2(cos(2θ)))
+            y = 2r(cos(θ)-1/2(sin(2θ))) where 0 ≤ θ ≤ 2π 
+
+這樣子就能描述在圖像中的一個心型。
+
+
+<img src="https://i.imgur.com/3Jkls23.png" />
+
+但這種描述形狀的方法實在太過複雜，因此影像的處理以及各種特徵偵測辨別一直都是非常困難的問題，直到近來深度學習及卷積類神經網路的進展才使這個領域有巨大的突破。透過前述兩個方法我們便能描述我們所看見的世界，顏色以及形狀。還有很多其他描繪邊緣或者形狀的方式例如Edge detection或者人臉用的特徵Harrs等等，用一個直觀的例子就是當我們把高斯分佈畫在一個二維的平面，會得到一個像青春痘的圖像。而化為平面圖像後看到的就會是一個中間較深兩側較淡的圓形。
+
+<img src = "https://www.researchgate.net/profile/Joern_Anemueller/publication/2906197/figure/fig1/AS:341348478668804@1458395227077/Circular-symmetric-super-Gaussian-probability-density-function-P.png" />
+
+
+- 圖為高斯分佈在三度空間的圖像。
+
+接著假設世界上存在一個機率分佈，稱作嘉兒分佈，在二維平面上的表現就是一張嘉兒蓋朵的臉，本來在求類似數學模型時，我們難以求解該分布的係數，但隨著近來機器學習技術的飛躍發展，我們並不需要去精確求解該分布的係數，而可以透過收集大量嘉兒蓋朵，或者理論上任何人的臉，來求得這個分佈，再進一步的將其繪製在任何圖像上，例如色情片中。這就是換臉色情片的技術背景。
+
+## 道德層面
+
+### 是副作用還是技術本身
+
+讓我們先拋開人臉的嘉兒分佈，以前年風靡全球的alphaGo為例，在這個架構下，我們可以將其視為我們透過大量的棋譜的訓練取得了一個機率分佈模型，輸入是當下的圍棋譜面，使其輸出一個最有可能贏棋的位置，於是我們就得到了打敗人類的棋王AI，在過去圍棋的決策過程太過複雜，才顯得這個技術突破如此重要，此類技術的存在並非特別為了把特定人士的臉貼到色情影片上存在，透過大量數據來逼近某個模型的分佈並進行預測，也就是前面所提到的曲線擬合（curve fitting)基本上就是人工智慧發展的主軸，期待透過大量數據的訓練來逼近一個預測函數(prediction function)使得我們得以模仿智慧生物的行為，也就是進行決策這個動作，從下棋到判斷臉書使用者想要看到的內容或者預測世界杯足球賽冠軍甚至腦補某人的臉到成人片女星身上，人類在進行這些行為過程都是透過收集資訊進行思考後作出判斷，人工智慧便是希望模擬這個過程，所以有這種技術應用的出現並不是科技發展的副作用，而是技術本身。
+
+對於換臉Ａ片的出現，一開始散佈的平台Reddit及最大的色情網站PornHub的態度自然都是進行禁止，這類技術的濫用可能需要倚賴平台方（無論是色情影像或者其他可能的濫用）的管理，值得討論的是，在色情網站上其實充斥著自拍色情片，姑且無法得知影片中人是否知情且同意，但他們實際上的確進行了性愛並且拍下了影片，而透過此類技術產生的Face swap porn則是子虛烏有的，讓我們試想幾個假設。
+
+在紐澤西州有一位女性Katie Krausz，與網路上一組有名的色情裸照主角長得很像，因此在求職與人際上受到極大的困擾[ref1]，其色情裸照為被惡意收集在社交軟體上的照片所合成的，故可以直接與其人格產生連結，因為該照片直接屬於本人，該女性實際上拍過該照片只是被加以變造，但在嘉兒分布的例子，如前面的笛卡兒心型線，只要改變一點點參數就可以產生完全不同的形態，以這個演算法變造出來的色情影片很可能與期待的結果不同（這也是我輩工程師的日常)，那是否可以宣稱嘉兒蓋朵本人並沒有拍過這些照片/影片，這些影像只是由一個數學模型產生的，令人足以聯想到嘉兒蓋朵的臉的數位訊號而已？如果該模型失準到令人聯想到的是吾友小美而非照片素材本人，該如何討論該行為呢？
+
+再設想一個極端的例子，假設我們並非特意收集嘉兒蓋朵的臉來訓練該模型以得到嘉兒分佈，而是隨機採取眾多帥氣的男星照片去建立一個可以在成人片中重建出一位虛擬超帥男人供自己意淫的人工智慧系統，姑且略過在各個國家法律中對成人影片的法律規範，這樣的行為是道德的嗎？ 又如果我們透過這些帥氣男星的臉求出的分佈恰巧長的像某位我的帥氣朋友小安，吾友小安在這件事上受到了什麼損害？ 
+
+因該分佈為恰巧產生，而非有人特意收集吾友的照片進行合成，吾友小安更沒有實際進行性行為與拍攝照片，那這個數學上的機率分佈，或者更直觀地說，這個程式所合成出來影像與小安的人格能否產生連結，目前並沒有針對對此類行為的道德討論，法律上自然更無法保障此狀況。
+
+目前技術上仍有許多限制，若非在網路上有極大量臉部照片以及豐富表情存檔的名人，一般人士大可放心，扣掉前者惡意擷取照片變造不雅圖片（這個狀況下有現行法律責任）的狀況，我們在網路上的影像存檔尚不足以被用來建造專屬於您的影像分佈，吾友小安的狀況極其特殊，雖然在數學上的可能性是存在的，針對這類不管是影像或者聲音分佈的變造技術都已存在，日前有人收集歐巴馬數年來的演講畫面與聲音，創造了一個可以讓歐巴馬說出任何話的影像變造技術[ref2]．因此相關的道德討論與法律制度的建立自然是必要的，在世界各國對於個資的保護越來越重視的網路時代，除了政府本身對數據擁有者的定義以及服務提供商的限制以外，各式新穎的技術更是層出不窮，加上這些技術並非特意創造來為惡，在創立更佳細膩的法律來維護權力之前，管理的責任是否只能繼續交給經營的平台，同時更加小心保護你我在網路上的數位足跡？
+
